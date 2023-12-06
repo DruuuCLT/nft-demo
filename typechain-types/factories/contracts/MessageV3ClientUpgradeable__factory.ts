@@ -102,6 +102,13 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "__MessageV3Client_init",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",

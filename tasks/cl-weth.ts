@@ -8,6 +8,8 @@ task("cl-weth", "")
 		const ethers = hre.ethers;
 		const network = hre.network.name;
 
+		const GAS_LIMIT = 0x100000;
+
 		const [deployer] = await ethers.getSigners();
 
 		let signer = deployer;
@@ -16,7 +18,7 @@ task("cl-weth", "")
 		const weth = await ethers.getContract("MockWETH");
 
 		let overrides = { value: ethers.parseUnits(args.amount) };
-		if (args.gas) overrides.gasLimit = parseInt(args.gas);
+		if (args.gas) overrides.gasLimit = GAS_LIMIT;
 
 		console.log("Depositing ETH for WETH");
 		const tx = await weth.connect(signer).deposit(overrides);

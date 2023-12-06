@@ -29,6 +29,7 @@ export interface MessageV3ClientUpgradeableInterface extends Interface {
       | "BRIDGE"
       | "CHAINS"
       | "FEE_TOKEN"
+      | "__MessageV3Client_init"
       | "configureBridge"
       | "messageProcess"
       | "owner"
@@ -49,6 +50,10 @@ export interface MessageV3ClientUpgradeableInterface extends Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "FEE_TOKEN", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "__MessageV3Client_init",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "configureBridge",
     values: [
@@ -95,6 +100,10 @@ export interface MessageV3ClientUpgradeableInterface extends Interface {
   decodeFunctionResult(functionFragment: "BRIDGE", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "CHAINS", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "FEE_TOKEN", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "__MessageV3Client_init",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "configureBridge",
     data: BytesLike
@@ -202,6 +211,8 @@ export interface MessageV3ClientUpgradeable extends BaseContract {
 
   FEE_TOKEN: TypedContractMethod<[], [string], "view">;
 
+  __MessageV3Client_init: TypedContractMethod<[], [void], "nonpayable">;
+
   configureBridge: TypedContractMethod<
     [
       _bridge: AddressLike,
@@ -267,6 +278,9 @@ export interface MessageV3ClientUpgradeable extends BaseContract {
   getFunction(
     nameOrSignature: "FEE_TOKEN"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "__MessageV3Client_init"
+  ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "configureBridge"
   ): TypedContractMethod<

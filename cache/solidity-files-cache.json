@@ -44,8 +44,8 @@
       ]
     },
     "/home/sdru/nft-demo/contracts/MessageV3ClientUpgradeable.sol": {
-      "lastModificationDate": 1701891061314,
-      "contentHash": "60082c4dc2737059c947a492e6510748",
+      "lastModificationDate": 1701896847313,
+      "contentHash": "b7b0b55d2a2468f6a2fed555e3c6f41d",
       "sourceName": "contracts/MessageV3ClientUpgradeable.sol",
       "solcConfig": {
         "version": "0.8.17",

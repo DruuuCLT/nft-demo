@@ -34,6 +34,7 @@ export interface SimpleNFTInterface extends Interface {
       | "CHAINS"
       | "FEE_TOKEN"
       | "REFERRAL"
+      | "__MessageV3Client_init"
       | "approve"
       | "balanceOf"
       | "bridge"
@@ -89,6 +90,10 @@ export interface SimpleNFTInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "FEE_TOKEN", values?: undefined): string;
   encodeFunctionData(functionFragment: "REFERRAL", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "__MessageV3Client_init",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [AddressLike, BigNumberish]
@@ -211,6 +216,10 @@ export interface SimpleNFTInterface extends Interface {
   decodeFunctionResult(functionFragment: "CHAINS", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "FEE_TOKEN", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "REFERRAL", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "__MessageV3Client_init",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "bridge", data: BytesLike): Result;
@@ -464,6 +473,8 @@ export interface SimpleNFT extends BaseContract {
 
   REFERRAL: TypedContractMethod<[], [string], "view">;
 
+  __MessageV3Client_init: TypedContractMethod<[], [void], "nonpayable">;
+
   approve: TypedContractMethod<
     [to: AddressLike, tokenId: BigNumberish],
     [void],
@@ -625,6 +636,9 @@ export interface SimpleNFT extends BaseContract {
   getFunction(
     nameOrSignature: "REFERRAL"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "__MessageV3Client_init"
+  ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "approve"
   ): TypedContractMethod<
