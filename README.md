@@ -20,7 +20,7 @@ npx hardhat cl-nft-buy --gas 1 --network harmony-testnet
 
 npx hardhat cl-nft-configure --gas 1 --network harmony-testnet
 
-then send both tokens to both contracts
+npx hardhat cl-nft-send-tokens --amount 10 --gas 1 --network harmony-testnet
 
 npx hardhat cl-set-bridge-status --status true --gas 1 --network harmony-testnet
 npx hardhat cl-set-fee-token --token {x} --gas 1 --network harmony-testnet
@@ -28,7 +28,7 @@ npx hardhat cl-set-weth --token {x} --gas 1 --network harmony-testnet
 npx hardhat cl-set-min-fee --fee 10 --gas 1 --network harmony-testnet
 npx hardhat cl-set-take-fees-offline --status false --gas 1 --network harmony-testnet
 
-npx hardhat cl-nft-bridge --id 16667000000000000 --chain 338 --network harmony-testnet
+npx hardhat cl-nft-bridge --id 16667000000000000 --chain 338 --gas 1 --network harmony-testnet
 
 ---
 
@@ -45,3 +45,12 @@ npx hardhat cl-set-min-fee --fee 10 --network cronos-testnet
 npx hardhat cl-set-take-fees-offline --status false --network cronos-testnet
 
 npx hardhat cl-nft-configure --network cronos-testnet
+
+---
+
+1) delete deployments
+2) ./testnet-nft-setup.sh harmony-testnet true
+2b) Update cl-nft-confgiure with new demo values
+3) npx hardhat cl-nft-configure --gas 1 --network harmony-testnet
+4) npx hardhat cl-nft-send-tokens --amount 10 --gas 1 --network harmony-testnet
+5) npx hardhat cl-nft-balance --network harmony-testnet

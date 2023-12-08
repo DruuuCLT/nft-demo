@@ -80,7 +80,7 @@ export interface SimpleNFTInterface extends Interface {
   encodeFunctionData(functionFragment: "BRIDGE", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "BRIDGE_PRICE",
-    values: [BigNumberish]
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "BUY_PRICE", values?: undefined): string;
   encodeFunctionData(functionFragment: "BUY_TOKEN", values?: undefined): string;
@@ -450,7 +450,7 @@ export interface SimpleNFT extends BaseContract {
 
   BRIDGE: TypedContractMethod<[], [string], "view">;
 
-  BRIDGE_PRICE: TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
+  BRIDGE_PRICE: TypedContractMethod<[], [bigint], "view">;
 
   BUY_PRICE: TypedContractMethod<[], [bigint], "view">;
 
@@ -609,7 +609,7 @@ export interface SimpleNFT extends BaseContract {
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "BRIDGE_PRICE"
-  ): TypedContractMethod<[arg0: BigNumberish], [bigint], "view">;
+  ): TypedContractMethod<[], [bigint], "view">;
   getFunction(
     nameOrSignature: "BUY_PRICE"
   ): TypedContractMethod<[], [bigint], "view">;

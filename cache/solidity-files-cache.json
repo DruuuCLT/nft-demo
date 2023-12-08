@@ -44,8 +44,8 @@
       ]
     },
     "/home/sdru/nft-demo/contracts/MessageV3ClientUpgradeable.sol": {
-      "lastModificationDate": 1701985547878,
-      "contentHash": "409c3d1661d5b03a2e4ee22edc8d9fda",
+      "lastModificationDate": 1702060635568,
+      "contentHash": "de57ec76dba74967f3d1c0277c1364ce",
       "sourceName": "contracts/MessageV3ClientUpgradeable.sol",
       "solcConfig": {
         "version": "0.8.17",
@@ -444,8 +444,8 @@
       ]
     },
     "/home/sdru/nft-demo/contracts/SimpleNFT.sol": {
-      "lastModificationDate": 1701890739132,
-      "contentHash": "b2720925ea1cd4e0d5e2d5ef3226982d",
+      "lastModificationDate": 1702063333657,
+      "contentHash": "bb265975bfa1ceb542053a4f4e9f029f",
       "sourceName": "contracts/SimpleNFT.sol",
       "solcConfig": {
         "version": "0.8.17",

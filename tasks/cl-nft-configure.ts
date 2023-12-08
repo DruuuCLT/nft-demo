@@ -28,7 +28,7 @@ task("cl-nft-configure", "")
 				ethers.ZeroAddress,
 				[ethers.parseUnits("1666700000", 0), ethers.parseUnits("338", 0)],
 				[0, 0],
-				["0x4328E74acac8e9BF27BFE53A7cBFDD2217bd0C7b", "0x46bFafc74f8dD1FC4c8Ea963ac881504Ba75D5fD"],
+				["0xa65F87B210A797af00E4A6D1BFd91F5644B87AC9", "0xe1683835E5eF56223aFb91A5026F381e9ca07383"],
 				[1, 1],
 				overrides
 			);

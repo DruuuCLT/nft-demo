@@ -17,9 +17,8 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
     string public BASE_URI  = "https://nfts.s3.de.io.cloud.ovh.net/";
     uint   public BUY_PRICE = 0.001 ether;
     IERC20 public BUY_TOKEN = IERC20(address(0));
+    uint public BRIDGE_PRICE = 0;
     address public REFERRAL = 0xb11cadFdD2De8c84D626CC45Bfe02B8EffABB3eC;
-
-    mapping(uint => uint) public BRIDGE_PRICE;
 
     event Mint(address to, uint id);
     event Received(uint id);
@@ -57,11 +56,12 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
         require(_ownerOf(_nftId) == msg.sender, "you do not own this nft");
 
         // take fee for bridging
-        SafeERC20.safeTransferFrom(BUY_TOKEN, msg.sender, address(this), BRIDGE_PRICE[_chainId]);
-
+        SafeERC20.safeTransferFrom(BUY_TOKEN, msg.sender, address(this), BRIDGE_PRICE);
+        // function safeTransferFrom(address from, address to, uint256 tokenId) external;
+        // function transferFrom(address from, address to, uint256 tokenId) external;
         // burn the nft from source chain
-        transferFrom(msg.sender, address(0), _nftId);
-
+        _burn(_nftId);
+        
         // data package to send across chain
         bytes memory _data = abi.encode(
             _to,

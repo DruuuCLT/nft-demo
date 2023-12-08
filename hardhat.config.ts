@@ -31,6 +31,8 @@ import "./tasks/cl-nft-init";
 import "./tasks/cl-nft-buy";
 import "./tasks/cl-nft-bridge";
 import "./tasks/cl-nft-configure";
+import "./tasks/cl-nft-send-tokens";
+import "./tasks/cl-nft-balance";
 
 const dotenv = require("dotenv");
 dotenv.config({ path: __dirname + "/.env" });
