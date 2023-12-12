@@ -17,14 +17,13 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
     string public BASE_URI  = "https://nfts.s3.de.io.cloud.ovh.net/";
     uint   public BUY_PRICE = 0.001 ether;
     IERC20 public BUY_TOKEN = IERC20(address(0));
-    uint public BRIDGE_PRICE = 0;
-    address public REFERRAL = 0xb11cadFdD2De8c84D626CC45Bfe02B8EffABB3eC;
+    uint public BRIDGE_PRICE = 0; // Set any amount you want
+    address public REFERRAL = 0xb11cadFdD2De8c84D626CC45Bfe02B8EffABB3eC; // Any address you want if you want to implement a referral system
 
     event Mint(address to, uint id);
     event Received(uint id);
 
     constructor(address _buyToken) {
-        // @note Deployed on avax testnet 43113 + optimism sepolia 11155420
         BUY_TOKEN = IERC20(_buyToken);
     }
 
@@ -47,9 +46,9 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
 
         _nftId = (block.chainid * 10**7) + _currId;
         emit Mint(_to, _nftId);
-        _safeMint(_to, _nftId);
-
         COUNTER.increment();
+
+        _safeMint(_to, _nftId);
     }
 
     function bridge(address _to, uint _chainId, uint _nftId) public onlyActiveBridge(_chainId) returns (uint _txId) {
@@ -57,8 +56,7 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
 
         // take fee for bridging
         SafeERC20.safeTransferFrom(BUY_TOKEN, msg.sender, address(this), BRIDGE_PRICE);
-        // function safeTransferFrom(address from, address to, uint256 tokenId) external;
-        // function transferFrom(address from, address to, uint256 tokenId) external;
+
         // burn the nft from source chain
         _burn(_nftId);
         
@@ -68,16 +66,20 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
             _nftId
         );
 
-        // send cross chain message
+        // send cross chain message, please have a look at _sendMessage() inside of MessageV3ClientUpgradeable in this repo
+        // If you want you can set your own allowed destination addresses by using function configureBridge() defined inside of MessageV3ClientUpgradeable in this repo
+        // This is similar to calling IMessageV3(BRIDGE).sendMessage()
+        // Our message is being sent here, from the source chain
         return _sendMessage(
             _chainId,      // id of the destination chain
-            REFERRAL,    // referrer (optional)
+            REFERRAL,      // referrer (optional)
             _data          // arbitrary data package to send
         );
     }
 
     /** BRIDGE RECEIVER */
     function messageProcess(uint, uint _sourceChainId, address _sender, address, uint, bytes calldata _data) external override onlySelfBridge(_sender, _sourceChainId) {
+        // Your message is being received here. Our infrastructure will call this method on the destination chain.
         // process data package from source chain
         (address _to, uint _nftId) = abi.decode(_data, (address, uint));
 
@@ -85,14 +87,6 @@ contract SimpleNFT is ERC721EnumerableUpgradeable, MessageV3ClientUpgradeable {
         // mint/send nft
         _safeMint(_to, _nftId);
     }
-
-    /** OWNER */
-    // function configure(uint[] calldata _chains, uint[] calldata _bridgePrices) external onlyOwner {
-    //     uint _chainCount = _chains.length;
-    //     for(uint x=0; x < _chainCount; x++) {
-    //         BRIDGE_PRICE[_chains[x]] = _bridgePrices[x];
-    //     }        
-    // }
 
     /** VIEWS */
     function walletOfOwner(address _owner) external view returns (uint[] memory _nftIds) {
